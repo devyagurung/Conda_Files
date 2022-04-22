@@ -1,0 +1,28 @@
+RNA_Seq_Project_DG
+# 4-22-22
+
+# Go to Ron and work through pipelines. 
+# 
+# RNA seq analysis Pipeline 
+# To download Fastq Files 
+Project: RNA-Seq of RNAs encapsidated by Murine Leukemia Virus
+
+# Two files downloaded from ENA
+
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/008/SRR1805258/SRR1805258.fastq.gz
+
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/009/SRR1805259/SRR1805259.fastq.gz
+
+unzip file that are in zipped format 
+unzip SRR1805258.fastq.gz
+unzip 
+
+zcat SRR1805258.fastq.gz
+zcat SRR1805259.fastq.gz
+# Next Temp: Fastqc Quality Check of the file 
+
+File Directory in Ron 
+/home/unhTW/users/dg1145/RNA_Project
+
+
+
