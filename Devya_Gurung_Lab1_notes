@@ -1,0 +1,576 @@
+# Lab1_notes Devya 
+### ican Keeping notes 
+
+## this command tells me what files are in this directory
+# type ls and hit (ctrl+ enter)
+
+ls
+Lab1_notes    shell_data
+
+### Print working directory 
+pwd
+/Users/devyagurung/Desktop/Gen_811_Lab
+
+## to clean up terminal 
+clear
+
+# cd shell_data
+
+cd shell_data
+
+# shows ( / ) due to -F
+ls -F
+
+pwd
+
+## manual page
+man ls
+
+# list files in order, shows who owns file
+
+ls -lstrhl
+
+man pwd
+
+# to see file in order
+ls -ltrh
+
+# head for first 
+head SRR097977.fastq 
+
+
+# To move back one directory, use cd ../
+cd ../ 
+
+## Previous Notes Above here 
+
+
+# To Go to your home and Desktop directory
+
+cd $Home/Desktop 
+
+# Relative Path
+# within the current working directory
+
+# Absolute Path 
+/ 
+#this will take you to your Root
+# then you can navigate through your path.  
+
+
+# To Get Back 2 directories Back
+cd ../../
+
+# shortcut to home directory
+cd ~ 
+/Users/devyagurung
+
+# Echo will return whatever you type in
+echo
+# Echo home will write you the home user 
+
+# env for Environment 
+
+export HOMW=/Users/devyagurung/Desktop/Gen_811_Lab
+
+# 
+conda deactivate 
+
+# To Reveal Hidden files in the folder 
+ls -a 
+# hiding files from certain program! 
+
+# to see the hidden files in relative path 
+ls -a shell_data/
+
+# Cat 
+# concatonate two files 
+
+# for untrimmed Fastq
+cd untrimmed_fastq
+
+# to indicate the end must match .fastq
+# wildcard : (*) 
+ls *.fastq
+
+# PSI='line' 
+# to change things to lines or $
+
+echo *fastq 
+# this does the same thing
+
+ls * 
+
+# To see files in application that starts with C
+ls Applications/c*
+
+
+# History Command 
+history 
+
+# To Search through history: ctrl R 
+
+# To clear hit clear or ctrl+L
+clear 
+
+# Head to see first few lines of a file
+head
+# Control + C if you need to cancel your command lines
+ctrl+C
+
+# Pipe | to output history to another command 
+history | grep 'ssh'
+# Grep: Return the lines that matches 1st position to hisotroy 
+
+# to check how much you have used in the history 
+
+# To See Grep Files that match with the sequence in the file
+grep 'ATAT' SRR097977.fastq | grep 'AAAAG'
+# this file is Grepping AAAAG along with ATAT. 
+# output
+GATTGCTTTAATGAAAAAGTCATATAAGTTGCCATG
+TGATAGCATTTCAATATTTACTTATGACATTAAAAG
+
+
+# Word count # of lines in the file 
+wc SRR097977.fastq 
+# output
+996    1992   47552 SRR097977.fastq
+
+# total # of lines in this file
+wc -l SRR097977.fastq 
+# output 
+996 SRR097977.fastq
+
+# 
+grep 'ATAT' SRR097977.fastq | wc -l
+#output
+36
+
+#
+grep 'ATAT' SRR097977.fastq | grep 'AAAAG' | wc -l
+
+# Output
+2
+
+# Lab 4 
+# pwd to check your directory status 
+/Users/devyagurung/Desktop/Gen_811_Lab
+
+# To go to different directory within your file
+cd /Users/devyagurung/Desktop/Gen_811_Lab/shell_data/sra_metadata/
+
+# Using relative path to go through untrimmed_fastq directory 
+cd ../untrimmed_fastq/
+
+# New command - nano to create new text file, or to open file for writing. 
+# creating new file using newfile.txt in the untrimmed_fastq directory with nano
+nano newfile.txt
+nano # just creates a file and you can rename later
+
+# to open file you have creates to ensure it's working
+## less new command 
+less newfile.txt 
+
+# to open the whole file in the screen 
+cat newfile.txt
+# to open the first 10 lines only
+head newfile.txt 
+
+# to add more text in your newfile.txt 
+nano newfile.txt
+
+# new command to make directory 
+mkdir tmp_files
+
+mkdir ../sra_metadata/tmp_files 
+
+# ls output
+SraRunTable.txt tmp_files
+
+# to move newfile.txt to tmp_files
+mv newfile.txt tmp_files/
+
+# Review last lab grep, cat, and pipes
+# make sure to go back to the right directory where the files are
+head SRR097977.fastq
+cat SRR097977.fastq
+less SRR097977.fastq
+
+# press q to exit out of the files 
+grep # command to find things 
+grep "@" SRR097977.fastq | wc -l 
+# output : 257
+grep @ SRR098026.fastq | wc -l
+# output 274
+
+# putting information into new file 
+grep @ SRR097977.fastq | wc -l > fastq_count.txt
+# ammending to the file 
+grep @ SRR098026.fastq | wc -l >> fastq_count.txt
+
+
+# use less into the file to check if your numbers is there or not
+
+## making specific folder in your Gen811 
+# Go to Absolute path 
+cd ../../.. or 
+cd /Users/devyagurung/Desktop/Gen_811_Lab 
+
+# making new directory in this file 
+mkdir fastq_files
+
+# to copy files without navigating back to the untrimmed_fastq files: copy all fastq file
+# using wildcard * 
+# easy to grab files at once 
+cp shell_data/untrimmed_fastq/*.fastq fastq_files/
+
+cd /Users/devyagurung/Desktop/Gen_811_Lab/fastq_files
+
+# to remove files 
+rm newfile.txt
+
+# ctrl + c if it asks you for password
+
+# Do a final "ls -l "
+cd ../../../..
+
+ls -l 
+# output
+total 24
+-rw-r--r--@ 1 devyagurung  staff  4479 Feb 25 17:47 Devya_Gurung_Lab1_notes
+-rw-r--r--  1 devyagurung  staff   529 Feb 11 16:58 Lab1_notes.sh
+drwxr-xr-x  4 devyagurung  staff   128 Feb 25 17:41 fastq_files
+drwxrwxr-x@ 6 devyagurung  staff   192 Feb 11 16:58 shell_data
+
+
+## LAB 5 3_4_22
+# Review for practical ~ 
+# Reads length, grep line ~  
+
+# commands to review 
+ls - output contents of folder
+cd - change dir 
+pwd - print working dir
+mv - move file to relative 
+cp - copy 
+cat - concatonate, make one come after other, print all to screen or command lines 
+grep - string, searches through a file for string match 
+wc - word count # of chr, words, # line 
+mkdir - make directory
+rm - remove 
+
+echo - 
+
+## how to set diff option for command with '-'
+- ex: 'ls -ltrh' # changes how much info is provided 
+
+## absolute path:
+- very useful for getting to your folder no matter where you are. 
+- star with '/' ex: /Users/ 
+go to Gen file ~
+
+
+# Relative path 
+- get you where you want to go from directory (folder that you are currently in )
+
+## Special Character 
+~ glob '*' (wildcard) is use to match 
+- pipe '|' (bar) send the output of the commamd to another command
+
+# Ex
+command 1 | command 2
+ls | wc 
+
+### Programs 
+- nano 
+- less 
+
+# ls -ltrh gives you the time as well, the most recent ones
+
+# Practice Practical
+
+## change working directory 
+
+### Use grep to search for a bad read ( any read with 7 uncalled bases in a row )
+grep 'NNNNNNN' SRR097977.fastq
+
+# can do -S only for less command, not for head 
+less -S SRR097977.fastq
+
+# output 
+@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
++SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
+
+## head 
+
+@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
+
+
+### Use the 'B' option to get line above each match 
+
+grep -B1 'NNNNNNNN' SRR098026.fastq
+
+#output
+@SRR098026.221 HWUSI-EAS1599_1:2:1:1:844 length=35
+ANNNNNNCCAGTTGTGCTTTTNNNNNNNNCGTTAA
+
+
+### How many lines below each grep line belong to a read?
+2 
+
+### Use the 'A' and 'B' options with grep to return the read and info lines for each match
+grep -A2 -B1 'NNNNNNN' SRR098026.fastq
+
+# A is for after and B is for before. 
+## C and D? 
+
+
+### Redirect the bad reads in SRR098026.fastq to a file called bad_reads.fastq 
+
+grep -A2 -B1 'NNNNNNN' SRR098026.fastq > bad_reads.fastq
+
+
+### Determine how many lines are in this file
+
+wc - l bad_reads.fastq 
+
+### Redirect the bad reads for both fastqs into bad_reads.txt at the same time
+grep -A2 -B1 'NNNNNNN' *fastq > bad_reads.txt
+# selecting fastq together  * 
+# if you put in the same file, you get error or freeze because the file is reading itself. 
+grep -A2 -B1 'NNNNNNN' *fastq > bad_reads.fastq
+
+### Determine how many bad read lines are in each of the fastq lines, and compare that with the number of lines in bad_reads.fastq
+
+
+### Have a look in the file to find out what is wrong
+
+### Use a reverse grep to remove the lines that
+
+grep -v thisstring file 
+grep NNNNNN fastq | grep -v thisstring
+
+### Add your name to the bottom of the bad_reads.fastq 
+# append 
+ls > list.txt 
+
+pwd >> list.txt 
+
+# how to do it ? adding your name to lis 
+
+echo  'Devya G' >> list.txt
+
+# most of the stuff goes to list file
+
+### Add your name to the top of the bad_reads.fastq 
+# adding on top of the list 
+
+nano 
+# you can do nano and add your name to the file list
+
+### Make a script that makes a file of bad reads 
+
+### change the permissions of the file and run the script
+# chmod 755 
+
+### add your name to the end of new bad reads file 
+#! /bin/bash 
+nano
+
+### Run md5sum on scripted_bad_reads.txt and write the output to my_md5sum.txt
+
+
+## bwa aligns the reads 
+# Formality of your script , bin: binary, bash: command line 
+bwa sample.fastq reference.fasta > sample.alignemnt.sam 
+
+# this will take alignments, gatk look at variants caller. 
+gatk sample.alignemnt.sam reference.fasta > sample_genotypes.vcf 
+
+
+        ## 4/1/22 ~ Lab Friday: Haley Lec
+# Metagenomics and Metabarcoding 
+Hyper Variable : Barcode regions 
+Taxonomy 
+16s : Bacterial and archaea
+ITS: fungi
+18s: Eukaryores 
+
+# They all have different databases. 
+
+# Compare the two diff types: 
+pwd
+
+# Site for microbial and bioinformatics data 
+https://qiime2.org/
+
+QIIME 2™ is a next-generation microbiome bioinformatics platform that is extensible, 
+free, open source, and community developed.
+
+# Quality filtering 
+# DADA2 : corrects erroneous sequences using an error model. 
+
+
+# OTU clustering : might indicate the samples in read to be the same. 
+OTU = operational taxonomic unit, 97% similarity 
+ASV = amplicon sequence variant, 99% similarity  
+# decision of whether to continue 
+
+# Taxonomy - uses a reference databases 
+# ITS is usefule for species and phylogenies. 
+
+# Alpha Rarefaction plotting 
+# different scores will skew your results, along with different starting materials. 
+
+# so, the # Alpha Rarefaction plotting comes in 
+# Tradeoff between a high sampling depth and losing samples from the dataset. 
+
+
+# Normalization 
+# Good if you have uniform, same # of reads. 
+# Library sizes can be different and you can do statistics on them. 
+## you can do proportion % abundance, log transform, DESeq. 
+
+
+## Qiime 2 commands practice (Codes )
+
+# mkdir moving-pics 
+# cd moving-pics 
+
+# to activate anaconda 
+#module load anaconda/colsa
+#source activate qiime2-2020.2 
+
+# qiime tools import --show-importatble-formats 
+# qiime tools import --show-importatble-types 
+
+# wget -h 
+
+# to run the tutorial, to get sample metadata 
+wget -O "sample-metadata.tsv" "https://data.qiime2.org/2022.2/tutorials/moving-pictures/sample_metadata.tsv"
+
+# making new dir for reads 
+mkdir emp-single-end-sequences
+# try to go back one directory if it says command not found. 
+
+ls emp-single-end-sequences
+
+# to import data 
+wget -O "emp-single-end-sequences/barcodes.fastq.gz" "https://data.qiime2.org/2022.2/tutorials/moving-pictures/emp-single-end-sequences/barcodes.fastq.gz"
+
+# so far the file is in zipped fastq format.  
+
+# Not to change the fastq to qza format 
+
+qiime tools import --show-importable-types 
+
+qiime tools import --type EMPSingleEndSequences --input-path emp-single-end-sequences --output-path emp-single-end-sequences.qza
+
+# 
+qiime tools peek emp-single-end-sequences.qza
+
+
+# Demultiplexing 
+# The demux.qza QIIME 2 artifact will contain the demultiplexed sequences. 
+# The second output (demux-details.qza) presents Golay error correction details, 
+
+qiime demux emp-single \
+  --i-seqs emp-single-end-sequences.qza \
+  --m-barcodes-file sample-metadata.tsv \
+  --m-barcodes-column barcode-sequence \
+  --o-per-sample-sequences demux.qza \
+  --o-error-correction-details demux-details.qza
+
+
+#### to summarize and visualize 
+qiime demux summarize --i-data demux.qza --o-visualization demux.qzv
+
+
+# 4/8/22
+
+# Installing mini conda 
+curl -sL \
+  "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh" > \
+  "Miniconda3.sh"
+
+
+# Lab Project : Individual 
+
+# Plan: Analyzing RNA-sequencing data, disease related  
+# Gather RNA-seq data from public databases.
+# Create Pipelines and generate data. 
+# Find highly enriched gene expression. 
+
+# Do DeSeq? 
+
+
+# 4/15/22
+# Conda already installed in Ron 
+to access to ron: ssh dg1145@ron.sr.unh.edu
+enter P: 
+
+# Get Git Hub account 
+# Look for Fastq data 
+# Find program/ pipeline to do your analysis 
+
+# To check the version: 
+conda -V 
+## Add the channels to look for programs
+conda config --add channels defaults 
+
+conda config --add channels bioconda
+
+conda config --add channels conda-forge 
+
+# to remove channels in bioconda if you get error 
+conda config --remove channels biocondq
+
+# Create my env 
+conda create -n GROUPNAME python bwa fastqc 
+
+conda activate GROUPNAME 
+
+conda install -c qiime/label/r2021.11 qiime2 
+
+# To start your script 
+### Install env conda 
+conda.sh 
+
+# To update 
+conda update -n base conda
+
+# How to install local conda env in my home directory without permission. 
+# In your folder ~ 
+
+# Do Git hub Repo 
+https://github.com/devyagurung/Conda_Files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
