@@ -15,7 +15,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/009/SRR1805259/SRR1805259.fastq.g
 
 unzip file that are in zipped format 
 unzip SRR1805258.fastq.gz
-unzip 
+
 
 zcat SRR1805258.fastq.gz
 zcat SRR1805259.fastq.gz
@@ -23,6 +23,36 @@ zcat SRR1805259.fastq.gz
 
 File Directory in Ron 
 /home/unhTW/users/dg1145/RNA_Project
+
+# Don't need to unzip to work with the files
+# To check the files, you can do zcat file | head 
+
+# GitHub Link
+
+# Go to Ron
+# Activate Conda Environment 
+# Then type (which fastqc) to see if fastqc is there or not?  
+ which fastqc 
+
+# How to activate Conda in Mac 
+do # 
+source activate !!!
+
+
+conda create --name Devya 
+
+# Type this first 
+conda env list 
+
+# module load anaconda 
+
+# or do source activate
+# 
+
+# How to do Fastqc quality check? 
+
+
+
 
 
 
