@@ -51,8 +51,28 @@ conda env list
 
 # How to do Fastqc quality check? 
 
+# do source activate first ~ 
+conda create --name devya
+
+conda activate devya
+
+# Installation steps
+# to install fastqc file in conda env 
+conda install fastqc
+
+# To check fastqc file 
+# type which fastqc 
+/home/unhTW/users/dg1145/.conda/envs/devya/bin/fastqc
 
 
+# to install STAR alignment in conda env 
+conda install -c bioconda star
 
+# to check if the star is downloaded or not (STAR capital)
+which STAR
+conda install -c bioconda star
 
+# 
+trimmomatic X.fastq 
+bwa -R reference_genome.fa trimmed_X. fastq 
 
