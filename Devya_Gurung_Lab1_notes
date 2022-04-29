@@ -510,7 +510,8 @@ curl -sL \
 
 # 4/15/22
 # Conda already installed in Ron 
-to access to ron: ssh dg1145@ron.sr.unh.edu
+to access to ron: 
+ssh dg1145@ron.sr.unh.edu
 enter P: 
 
 # Get Git Hub account 
@@ -550,18 +551,58 @@ conda update -n base conda
 https://github.com/devyagurung/Conda_Files
 
 
+RNA_Seq_Project_DG
+# 4-22-22
+
+# Go to Ron and work through pipelines. 
+# 
+# RNA seq analysis Pipeline 
+# To download Fastq Files 
+Project: RNA-Seq of RNAs encapsidated by Murine Leukemia Virus
+
+# Two files downloaded from ENA
+
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/008/SRR1805258/SRR1805258.fastq.gz
+
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR180/009/SRR1805259/SRR1805259.fastq.gz
+
+unzip file that are in zipped format 
+unzip SRR1805258.fastq.gz
 
 
+zcat SRR1805258.fastq.gz
+zcat SRR1805259.fastq.gz
+# Next Temp: Fastqc Quality Check of the file 
+
+File Directory in Ron 
+/home/unhTW/users/dg1145/RNA_Project
+
+# Don't need to unzip to work with the files
+# To check the files, you can do zcat file | head 
+
+# GitHub Link
+
+# Go to Ron
+# Activate Conda Environment 
+# Then type (which fastqc) to see if fastqc is there or not?  
+ which fastqc 
+
+# How to activate Conda in Mac 
+do # 
+source activate !!!
 
 
+conda create --name Devya 
 
+# Type this first 
+conda env list 
 
+# module load anaconda 
 
+# or do source activate
+# 
 
-
-
-
-
+# How to do Fastqc quality check? 
 
 
 
