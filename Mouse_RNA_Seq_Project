@@ -1,0 +1,173 @@
+# RNA seq analysis Project following Pipeline
+# Paired End Type 
+Project: RNA-Seq of Mouse Breast Cancer 
+# Disease Type: Mouse Breast Cancer
+Background: 
+
+
+#Work through the pipelines . 
+Ron user: ssh dg1145@ron.sr.unh.edu
+
+# Go to Ron first ~ Log in using your user info
+# Activate Conda Environment 
+# How to activate Conda in Mac ~ Do
+source activate !!!
+conda create --name Devya 
+conda env list 
+conda --version
+#output
+conda 4.7.5
+
+#
+conda activate devya
+
+# Installation steps
+# to install fastqc file in conda env 
+conda install fastqc
+
+
+# Then type (which fastqc) to see if fastqc is there or not?  
+ which fastqc 
+# To check fastqc file 
+# typing which fastqc shows you the location
+/home/unhTW/users/dg1145/.conda/envs/devya/bin/fastqc
+
+# to install STAR alignment in conda env 
+conda install -c bioconda star
+
+# to check if the star is downloaded or not (STAR capital)
+which STAR
+conda install -c bioconda star
+
+# Two files Paired End downloaded from ENA
+
+# File Directory in Ron 
+/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end
+
+# Next Temp: Fastqc Quality Check of the file 
+# Don't need to unzip file to work 
+# To check the files, you can do zcat file | head 
+
+# GitHub Link
+
+
+# Downloading Fastq files Raw Reads from ENA (Paired end)
+Read 1: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015618/ERR015618_1.fastq.gz
+Read 2: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015618/ERR015618_2.fastq.gz
+
+# Downloading 2nd Read Pair-end
+Read 1: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015623/ERR015623_1.fastq.gz
+Read 2: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015623/ERR015623_2.fastq.gz
+
+
+# Next Analyze file in fastqc (Fastqc is installed in conda env)
+# How to do Fastqc quality check? 
+# Run fastqc in gz format 
+fastqc ERR015618_1.fastq.gz 
+# running fastqc in 1st pair - R2 with output file 
+# Running Fastqc other reads and putting it in different files
+fastqc ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/Fastqc_Files_PE_Mouse
+
+# 2nd Paired-end reads # Check reads quality 
+fastqc ERR015623_1.fastq.gz ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/Fastqc_Files_PE_Mouse 
+
+# Check the fastqc HTML file in Filezilla 
+# See the quality of FASTQ files 
+the file quality is checked using Filezilla, which gives you the FastQC report. 
+
+# Installing Trimmomatic 
+# Trimming tools 
+which trim_scriptV2.sh 
+
+# Run Trimmomatic to trim the files. 
+# Trimmomatic is installed in conda env
+
+trim_scriptV2.sh ERR015618_1.fastq.gz ERR015618_2.fastq.gz 
+
+# 2nd Paired reads run with trim_scripts 
+trim_scriptV2.sh ERR015623_1.fastq.gz ERR015623_2.fastq.gz 
+
+# trimming unpaired files
+trim_scriptV2.sh unpaired-ERR015623_1.fastq.gz unpaired-ERR015623_2.fastq.gz 
+
+# Then running fastqc in trimmed files (Paired and unpaired)
+fastqc ERR015618_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+fastqc unpaired-ERR015618_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc unpaired-ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+# 2nd Paired end Fastqc in trmmmed files 
+fastqc ERR015623_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+fastqc unpaired-ERR015623_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc unpaired-ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+
+# For Alignment 
+# Get Mouse Reference Genome from Online database
+# Download Mouse Ref Genomes 
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M29/GRCm39.genome.fa.gz
+
+# GTF file of Mouse: Comprehensive gene annotation of Chromosome regions only 
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M29/gencode.vM29.annotation.gtf.gz
+
+# Unzip Gzipped files 
+gunzip *GRCm39.genome.fa.gz
+gunzip *gencode.vM29.annotation.gtf.gz
+# if unzipping doesn't work, you might need to delete and reload the files. 
+# Errors might occur with gunzip if file is corrupted
+
+# Running STAR tools (Background on STAR)
+# STAR: Spliced Transcripts Alignments to a Reference
+# Star is a tool that allows you to build index of your genome of mouse or human.
+# Star also helps you to map the reads with the index files against the genomes and find location of mapping in the genome. 
+# Helps in performing alignments. 
+
+# Creating the Index command in alignments directory
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --genomeFastaFiles GRCm39.genome.fa --sjdbGTFfile gencode.vM29.annotation.gtf --sjdbOverhang 99 
+
+# Copying fastq.gz files to trimmed_fastqc folder 
+cp ERR015618_1.fastq.gz trimmed_fastqc
+cp ERR015618_2.fastq.gz ERR015623_1.fastq.gz ERR015623_2.fastq.gz trimmed_fastqc
+
+# STAR Alignment of 1st Pair 
+STAR --runThreadN 8 --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --readFilesIn ERR015618_1.fastq.gz ERR015618_2.fastq.gz --readFilesCommand zcat --outSAMtype BAM Unsorted --outFileNamePrefix ./aligned/ERR015618
+
+
+# Alignment of 2nd Pair 
+STAR --runThreadN 8 --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --readFilesIn ERR015623_1.fastq.gz ERR015623_2.fastq.gz --readFilesCommand zcat --outSAMtype BAM Unsorted --outFileNamePrefix ./aligned/ERR015623
+
+# Other way to write the script 
+STAR \
+--runThreadN 8 \
+--genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments \
+--readFilesIn ERR015623_1.fastq.gz ERR015623_2.fastq.gz \
+--readFilesCommand zcat \
+--outSAMtype BAM Unsorted \
+--outFileNamePrefix aligned/ERR23
+
+# aligned directory has the output 2 fastq files. 
+# It gives you output in bam format
+# pwd 
+/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned
+# output 
+-rw-rw-r-- 1 dg1145 dg1145 709869817 May 11 17:02 ERR015618Aligned.out.bam
+-rw-rw-r-- 1 dg1145 dg1145      2008 May 11 17:02 ERR015618Log.final.out
+-rw-rw-r-- 1 dg1145 dg1145      7720 May 11 17:02 ERR015618Log.out
+-rw-rw-r-- 1 dg1145 dg1145       364 May 11 17:02 ERR015618Log.progress.out
+-rw-rw-r-- 1 dg1145 dg1145    119530 May 11 17:02 ERR015618SJ.out.tab
+-rw-rw-r-- 1 dg1145 dg1145 646000808 May 11 17:09 ERR015623Aligned.out.bam
+-rw-rw-r-- 1 dg1145 dg1145      2008 May 11 17:09 ERR015623Log.final.out
+-rw-rw-r-- 1 dg1145 dg1145      7720 May 11 17:09 ERR015623Log.out
+-rw-rw-r-- 1 dg1145 dg1145       364 May 11 17:09 ERR015623Log.progress.out
+-rw-rw-r-- 1 dg1145 dg1145    117976 May 11 17:09 ERR015623SJ.out.tab
+
+# Checking the aligned files data 
+less ERR015618Log.final.out
+less ERR015623Log.final.out
+
+# logfile
+# gives information about the alignment run 
+# tells you the percentage of Uniquely mapped reads 
