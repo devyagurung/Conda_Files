@@ -31,16 +31,13 @@ II. Raw Sequencing Reads Analysis
 2. Then run fastqc to check the quality of your reads. 
 3. Fastqc files were checked in Filezilla. Filezilla was installed in computer. 
 
-<img width="764" alt="image" src="https://user-images.githubusercontent.com/10855866/168224101-31e016ac-b237-4eee-a5a6-e3032add2d09.png">
-
 <img width="802" alt="image" src="https://user-images.githubusercontent.com/10855866/168224153-9b080209-e6e4-411e-bccb-337e7b8c9b29.png">
 
 
-4. Next, perform trimming. 
+4. Next, performed trimming. 
 5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
-6. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
+6. Then, the Fastqc were performed in trimmed files. The trimmed fastqc files were also checked in Filezilla and compared. 
 
-<img width="766" alt="image" src="https://user-images.githubusercontent.com/10855866/168223667-e4559ce9-f889-4655-a825-2470c45c5243.png">
 
 <img width="745" alt="image" src="https://user-images.githubusercontent.com/10855866/168223789-67bb2527-7772-4d41-91c9-3f36e0fde43f.png">
 
@@ -72,14 +69,17 @@ Samtools output files from bam files such as png files were viewed in Filezilla.
 
 <img width="734" alt="image" src="https://user-images.githubusercontent.com/10855866/168225649-ccdfcef6-1681-47d1-a209-cb888628097e.png">
 
-<img width="454" alt="image" src="https://user-images.githubusercontent.com/10855866/168225713-4a5c41e3-44e2-4d1a-9669-2ce2718f598f.png">
 
-
-12. The output from featureCounts were used in R to see files. 
+12. The output from featureCounts were used in R to view the files and summary. 
 
 
 
-Future Work Goals 
+Future Work Goals: 
+Be able to creat ggplots in R. Generate differential gene expression and do normalization. 
+Fig below from R shows different types of cancer found in male and female.   
+
+<img width="238" alt="image" src="https://user-images.githubusercontent.com/10855866/168307202-de4f674d-e9d7-444e-b360-439948d142ab.png">
+
 
 
 
