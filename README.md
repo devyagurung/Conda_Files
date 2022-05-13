@@ -36,15 +36,15 @@ II. Raw Sequencing Reads Analysis
 <img width="802" alt="image" src="https://user-images.githubusercontent.com/10855866/168224153-9b080209-e6e4-411e-bccb-337e7b8c9b29.png">
 
 
-5. Next, perform trimming. 
-6. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
-7. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
+4. Next, perform trimming. 
+5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
+6. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
 
 <img width="766" alt="image" src="https://user-images.githubusercontent.com/10855866/168223667-e4559ce9-f889-4655-a825-2470c45c5243.png">
 
 <img width="745" alt="image" src="https://user-images.githubusercontent.com/10855866/168223789-67bb2527-7772-4d41-91c9-3f36e0fde43f.png">
 
-10. Then, Genome Index were created using STAR. 
+7. Then, Genome Index were created using STAR. 
 For this project, Mouse genome was used from gencode. 
 Version: GRCm39
 https://www.gencodegenes.org/ 
@@ -60,7 +60,7 @@ Star: Generating genome index
 
 <img width="468" alt="image" src="https://user-images.githubusercontent.com/10855866/168225018-2c71ca05-0f3f-43f5-bf23-75570cc8d896.png">
 
-12. STAR was also used to do alignments of the sequence. Ran pair-end reads 
+8. STAR was also used to do alignments of the sequence. Ran pair-end reads 
 ~ Alignment Output files: 1st Pair!
 
 <img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225131-77b30376-878c-4909-b4a3-37c627db14d7.png">
@@ -70,9 +70,9 @@ Alignment Output files: 2nd Pair!
 
 <img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225201-2e4b08b3-cca4-49b6-9288-345ff42cf85d.png">
 
-14. After STAR, output files such as .bam were generated which was used in next step.
+9. After STAR, output files such as .bam were generated which was used in next step.
 
-15. FeatureCounts was performed on .bam files output 
+10. FeatureCounts was performed on .bam files output 
 
 Output of FeatureCounts!
 <img width="372" alt="image" src="https://user-images.githubusercontent.com/10855866/168225465-fc6f04a5-2035-47c5-8471-247ee5491a19.png">
@@ -80,7 +80,7 @@ Output of FeatureCounts!
 <img width="344" alt="image" src="https://user-images.githubusercontent.com/10855866/168225489-1d4f1ad1-e216-4e13-81e6-df05ee809eeb.png">
 
 
-17. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
+11. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
 
 Samtools output files from bam files such as png files were viewed in Filezilla. 
 
@@ -91,7 +91,7 @@ Samtools output files from bam files such as png files were viewed in Filezilla.
 <img width="454" alt="image" src="https://user-images.githubusercontent.com/10855866/168225713-4a5c41e3-44e2-4d1a-9669-2ce2718f598f.png">
 
 
-19. The output from featureCounts were used in R to see files. 
+12. The output from featureCounts were used in R to see files. 
 
 <img width="448" alt="image" src="https://user-images.githubusercontent.com/10855866/168225842-3759c2c0-2320-466e-bc56-011a944eda63.png">
 
