@@ -7,12 +7,9 @@
  ### Used Pair-wise RNAseq saw fastq data. 
  
  ## Overview of the Workflow 
- Figure 1 Description
+ Figure 1 Description: Pipeline for RNA-seq Analysis
  
  <img width="894" alt="image" src="https://user-images.githubusercontent.com/10855866/168222173-f7f996f6-1767-40b1-aa8c-34b7e72a2407.png">
-
-## Table of Contents 
-~ Getting Started 
 
 ## Background: 
 
@@ -24,7 +21,7 @@ This study was done in mice model to further understand the mechanism in human b
 Steps in details 
 Raw Sequencing Reads Analysis
    Fastq file data format 
-1. 1st get the fastq raw data (RNA seq) from public databases.
+1. First get the fastq raw data (RNA seq) from public databases.
    ~ The fastq raw data (RNA seq) downloaded from public databases
      Website link of data collection: https://www.ebi.ac.uk/ena/browser/view/PRJEB2203?show=reads    
 2. Then run fastqc to check the quality of your reads. 
@@ -88,8 +85,9 @@ But, in sample2 ERR015623, the GC content was below 10th percentile of mapped se
 
 
 ### Future Work Goals: 
-Be able to creat ggplots in R. Generate differential gene expression and do normalization. 
+My future goal is to perform RNA-seq analysis in R. To be able to create ggplots and heatmaps in R. Then, generate differential gene expression and do normalization. 
 This plots and figures were generated from GTEX data files which contained prepackged RNA-seq data.
+
 Different libraries in R can be installed to run your samples. 
 
 Fig 1. Ggplot from R shows different types of cancer found in male and female.   
