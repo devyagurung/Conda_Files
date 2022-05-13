@@ -44,12 +44,21 @@ II. Raw Sequencing Reads Analysis
 
 <img width="745" alt="image" src="https://user-images.githubusercontent.com/10855866/168223789-67bb2527-7772-4d41-91c9-3f36e0fde43f.png">
 
-10. Then, Genome Index were created using STAR
-11. STAR was also used to do alignments of the sequence. Ran pair-end reads 
-12. After STAR, output files such as .bam were generated which was used in next step.
-13. FeatureCounts was performed on .bam files output 
-14. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
-15. The output from featureCounts were used in R to see files. 
+10. Then, Genome Index were created using STAR. 
+For this project, Mouse genome was used from gencode. 
+Version: GRCm39
+https://www.gencodegenes.org/ 
+options to filter: Use GTF file of (regions: CHR) Comprehensive gene annotation and Fasta files (Genome sequence, Regions: ALL). 
+
+<img width="349" alt="image" src="https://user-images.githubusercontent.com/10855866/168224508-200f2fe5-07d7-4acc-a2f8-1e1661746c16.png">
+STAR manual: 
+https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf
+
+12. STAR was also used to do alignments of the sequence. Ran pair-end reads 
+13. After STAR, output files such as .bam were generated which was used in next step.
+14. FeatureCounts was performed on .bam files output 
+15. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
+16. The output from featureCounts were used in R to see files. 
 
 
 
