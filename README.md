@@ -76,10 +76,22 @@ Samtools output files from bam files such as png files were viewed in Filezilla.
 
 Future Work Goals: 
 Be able to creat ggplots in R. Generate differential gene expression and do normalization. 
-Fig below from R shows different types of cancer found in male and female.   
+This plots and figures were generated from GTEX data files which contained prepackged RNA-seq data.
+Different libraries in R can be installed to run your samples. 
+
+Fig A. Ggplot from R shows different types of cancer found in male and female.   
 
 <img width="238" alt="image" src="https://user-images.githubusercontent.com/10855866/168307202-de4f674d-e9d7-444e-b360-439948d142ab.png">
 
+Fig B. below show boxplots.
+The plot shows causes of death in male and female population.     
+
+<img width="266" alt="image" src="https://user-images.githubusercontent.com/10855866/168308743-e8cc115e-4350-4f9c-97ef-7ee1e082105e.png">
+
+Fig C. 
+Shows Differentially expressed genes based on adjusted P. Values 
+
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/10855866/168308828-8bb704fd-146e-411e-8f78-611a6f1827ec.png">
 
 
 
