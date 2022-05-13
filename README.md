@@ -50,7 +50,6 @@ Version: GRCm39
 https://www.gencodegenes.org/ 
 options to filter: Use GTF file of (regions: CHR) Comprehensive gene annotation and Fasta files (Genome sequence, Regions: ALL). 
 
-<img width="349" alt="image" src="https://user-images.githubusercontent.com/10855866/168224508-200f2fe5-07d7-4acc-a2f8-1e1661746c16.png">
 STAR manual: 
 https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf
 
@@ -58,26 +57,11 @@ Once the fasta files and gtf files were downloaded.
 Star was performed for generating genome index. 
 Star: Generating genome index
 
-<img width="468" alt="image" src="https://user-images.githubusercontent.com/10855866/168225018-2c71ca05-0f3f-43f5-bf23-75570cc8d896.png">
-
 8. STAR was also used to do alignments of the sequence. Ran pair-end reads 
-~ Alignment Output files: 1st Pair!
-
-<img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225131-77b30376-878c-4909-b4a3-37c627db14d7.png">
-
-
-Alignment Output files: 2nd Pair!
-
-<img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225201-2e4b08b3-cca4-49b6-9288-345ff42cf85d.png">
 
 9. After STAR, output files such as .bam were generated which was used in next step.
 
 10. FeatureCounts was performed on .bam files output 
-
-Output of FeatureCounts!
-<img width="372" alt="image" src="https://user-images.githubusercontent.com/10855866/168225465-fc6f04a5-2035-47c5-8471-247ee5491a19.png">
-
-<img width="344" alt="image" src="https://user-images.githubusercontent.com/10855866/168225489-1d4f1ad1-e216-4e13-81e6-df05ee809eeb.png">
 
 
 11. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
@@ -93,11 +77,9 @@ Samtools output files from bam files such as png files were viewed in Filezilla.
 
 12. The output from featureCounts were used in R to see files. 
 
-<img width="448" alt="image" src="https://user-images.githubusercontent.com/10855866/168225842-3759c2c0-2320-466e-bc56-011a944eda63.png">
-
-<img width="466" alt="image" src="https://user-images.githubusercontent.com/10855866/168225934-b01cb43b-ff0d-48b6-ba2c-8f8d0a908d5f.png">
 
 
+Future Work Goals 
 
 
 
