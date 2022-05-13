@@ -77,4 +77,47 @@ resultsDEGs <- results %>%
 resultsDEGs
 
 
+# Somethings I tried in the data I got from featureCounts in R.
+# R script
+# Project: Mouse Breast Cancer
+
+# Install packages 
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("DESeq2")
+
+require("DESeq2")
+
+# setting working directory
+setwd("~/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R")
+
+# Packages installed in R 
+install.packages("tidyverse")
+install.packages("ggplot2")
+
+# to check packages
+library(dplyr)
+library(tidyr)
+library(scales)
+library(ggplot2)
+
+library("DESeq2")
+
+# Analyzing Featurecounts 1st Pair 
+countdata_ERR18 <- read.delim("Output_FeatureCounts_ERR015618", skip=1)
+#View(countdata_ERR18)
+
+head(countdata_ERR18)
+tail(countdata_ERR18)
+
+str(countdata_ERR18)
+# dimension of the file
+dim(countdata_ERR18)
+
+summary(countdata_ERR18)
+head(countdata_ERR18)[1:5]
+# 
+
+
 
