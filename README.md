@@ -65,14 +65,38 @@ Star: Generating genome index
 
 <img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225131-77b30376-878c-4909-b4a3-37c627db14d7.png">
 
+
 Alignment Output files: 2nd Pair!
-<img width="361" alt="image" src="https://user-images.githubusercontent.com/10855866/168225201-2e4b08b3-cca4-49b6-9288-345ff42cf85d.png">
+
+<img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225201-2e4b08b3-cca4-49b6-9288-345ff42cf85d.png">
 
 14. After STAR, output files such as .bam were generated which was used in next step.
 
 15. FeatureCounts was performed on .bam files output 
-16. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
-17. The output from featureCounts were used in R to see files. 
+
+Output of FeatureCounts!
+<img width="372" alt="image" src="https://user-images.githubusercontent.com/10855866/168225465-fc6f04a5-2035-47c5-8471-247ee5491a19.png">
+
+<img width="344" alt="image" src="https://user-images.githubusercontent.com/10855866/168225489-1d4f1ad1-e216-4e13-81e6-df05ee809eeb.png">
+
+
+17. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
+
+Samtools output files from bam files such as png files were viewed in Filezilla. 
+
+<img width="736" alt="image" src="https://user-images.githubusercontent.com/10855866/168225581-c3420d9f-5fec-4c08-8729-dd072797a47f.png">
+
+<img width="734" alt="image" src="https://user-images.githubusercontent.com/10855866/168225649-ccdfcef6-1681-47d1-a209-cb888628097e.png">
+
+<img width="454" alt="image" src="https://user-images.githubusercontent.com/10855866/168225713-4a5c41e3-44e2-4d1a-9669-2ce2718f598f.png">
+
+
+19. The output from featureCounts were used in R to see files. 
+
+<img width="448" alt="image" src="https://user-images.githubusercontent.com/10855866/168225842-3759c2c0-2320-466e-bc56-011a944eda63.png">
+
+<img width="466" alt="image" src="https://user-images.githubusercontent.com/10855866/168225934-b01cb43b-ff0d-48b6-ba2c-8f8d0a908d5f.png">
+
 
 
 
