@@ -1,0 +1,334 @@
+# RNA seq analysis Project following Pipeline
+# Script for RNA seq Project
+
+# Paired End Type 
+Project: RNA-Seq of Mouse Breast Cancer 
+# Disease Type: Mouse Breast Cancer
+
+Background: 
+# Cancer is a byproduct of many dysregulations, both within the cell and in the tumor microenvironment. 
+# It can occur due to mutations, or environmental factors. Breast cancer is one of the most common cancers found in women. 
+# In the United States alone, 255,000 cases of breast cancer are diagnosed in women and 2300 in men (CDC). Breast cancer is caused when cells in breast grow uncontrollably. 
+# In the study where I gathered raw fastq data from, studied the breast cancer in genetically engineered mouse models and performed RNA seq 1pairwise alignment. 
+# The mouse models carried Trp53-mutated breast cancer, along with Brca1 and Brca2 associated breast cancer and E-cadherin (Cdh1) mutated lobular breast cancer. 
+# The study is done in mice model to further understand the mechanism in human breast cancer. Cancer compromises the functions of the immune system, therefore understanding how it regulates cells and the microenvironment is vital in developing cancer immunotherapy. 
+
+
+#Work through the pipelines 
+Methods Steps: 
+1. 1st Get the fastq raw data from public databases
+2. Then run fastqc to check the quality of your reads
+3. Fastqc files were checked in Filezilla. Filezilla was installed in computer
+4. Next, perform trimming. 
+5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
+6. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
+7. Then, Genome Index were created using STAR
+8. STAR was also used to do alignments of the sequence. Ran pair-end reads 
+9. After STAR, output files such as .bam were generated which was used in next step.
+10. FeatureCounts was performed on .bam files output 
+11. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
+
+
+# Citations of the paper: 
+Varela I, Klijn C, Stephens PJ, et al. Somatic structural rearrangements in genetically engineered mouse mammary tumors. 
+Genome Biology. 2010 ;11(10):R100. DOI: 10.1186/gb-2010-11-10-r100. PMID: 20942901; PMCID: PMC3218656
+
+# Logging in Remotely to Ron
+Ron user: ssh dg1145@ron.sr.unh.edu
+# Go to Ron first ~ Log in using your user info
+
+# Activate Conda Environment 
+# How to activate Conda in Mac ~ Do
+source activate !!!
+conda create --name Devya 
+conda env list 
+conda --version
+#output
+conda 4.7.5
+#
+conda activate devya
+
+# Installation steps for the files required to run my project
+# to install fastqc file in conda env 
+conda install fastqc
+# Then type (which fastqc) to see if fastqc is there or not?  
+ which fastqc 
+# To check fastqc file 
+# output: typing which fastqc shows you the location
+/home/unhTW/users/dg1145/.conda/envs/devya/bin/fastqc
+
+# to install STAR alignment in conda env 
+conda install -c bioconda star
+
+# to check if the star is downloaded or not (STAR capital)
+which STAR
+conda install -c bioconda star
+
+# To install featureCounts, install the subread package
+conda install -c bioconda subread 
+
+# Two files Paired End downloaded from ENA
+# ENA Website where fastq files are downloaded
+https://www.ebi.ac.uk/ena/browser/view/PRJEB2203?show=reads
+
+# File Directory in Ron 
+/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end
+
+# Next Temp: Fastqc Quality Check of the file 
+# Don't need to unzip file to work 
+# To check the files, you can do zcat file | head 
+
+# My GitHub Link
+https://github.com/devyagurung/Conda_Files
+
+
+# Downloading Fastq files Raw Reads from ENA (Paired end)
+Read 1: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015618/ERR015618_1.fastq.gz
+Read 2: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015618/ERR015618_2.fastq.gz
+
+# Downloading 2nd Read Pair-end
+Read 1: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015623/ERR015623_1.fastq.gz
+Read 2: wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR015/ERR015623/ERR015623_2.fastq.gz
+
+
+# Next Analyze file in fastqc (Fastqc is installed in conda env)
+# How to do Fastqc quality check? 
+# Run fastqc in gz format 
+fastqc ERR015618_1.fastq.gz 
+# running fastqc in 1st pair - R2 with output file 
+# Running Fastqc other reads and putting it in different files
+fastqc ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/Fastqc_Files_PE_Mouse
+
+# 2nd Paired-end reads # Check reads quality 
+fastqc ERR015623_1.fastq.gz ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/Fastqc_Files_PE_Mouse 
+
+# Check the fastqc HTML file in Filezilla 
+# See the quality of FASTQ files 
+the file quality is checked using Filezilla, which gives you the FastQC report. 
+
+# Installing Trimmomatic 
+# Trimming tools 
+which trim_scriptV2.sh 
+
+# Trimming fastq.gz files with trim_scriptV2.sh 
+trim_scriptV2.sh ERR015618_1.fastq.gz ERR015618_2.fastq.gz 
+
+# 2nd Paired reads run with trim_scripts 
+trim_scriptV2.sh ERR015623_1.fastq.gz ERR015623_2.fastq.gz 
+
+# trimming unpaired files
+trim_scriptV2.sh unpaired-ERR015623_1.fastq.gz unpaired-ERR015623_2.fastq.gz 
+
+# Then running fastqc in trimmed files (Paired and unpaired)
+fastqc ERR015618_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+fastqc unpaired-ERR015618_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc unpaired-ERR015618_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+# 2nd Paired end Fastqc in trmmmed files 
+fastqc ERR015623_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+fastqc unpaired-ERR015623_1.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+fastqc unpaired-ERR015623_2.fastq.gz -o /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc
+
+# Reference Genome For Alignment 
+# Get Mouse Reference Genome from Online database
+# Downloaded Mouse Ref Genomes Version: GRCm39
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M29/GRCm39.genome.fa.gz
+
+# GTF file of Mouse: Comprehensive gene annotation of Chromosome regions only 
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M29/gencode.vM29.annotation.gtf.gz
+
+# Unzip Gzipped files 
+gunzip *GRCm39.genome.fa.gz
+gunzip *gencode.vM29.annotation.gtf.gz
+# if unzipping doesn't work, you might need to delete and reload the files. 
+# side note: Errors might occur with gunzip if the file is corrupted. 
+# So you might need to rerun your commands and delete corrupted version. 
+
+Running STAR tools (Background on STAR)
+# STAR: Spliced Transcripts Alignments to a Reference
+# Star is a tool that allows you to build index of your genome of mouse or human.
+# Star also helps you to map the reads with the index files against the genomes and find location of mapping in the genome. 
+# Helps in performing alignments. 
+
+# Creating the Genome Index command in alignments directory
+# --genomeDir : location where the indexes will be stored 
+# --sjdbOverhang : correspond to read length of your data, if your read length is 100: you can put 99. 
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --genomeFastaFiles GRCm39.genome.fa --sjdbGTFfile gencode.vM29.annotation.gtf --sjdbOverhang 99 
+
+# Copying fastq.gz files to trimmed_fastqc folder 
+cp ERR015618_1.fastq.gz trimmed_fastqc
+cp ERR015618_2.fastq.gz ERR015623_1.fastq.gz ERR015623_2.fastq.gz trimmed_fastqc
+
+# STAR Alignment of 1st Pair 
+STAR --runThreadN 8 --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --readFilesIn ERR015618_1.fastq.gz ERR015618_2.fastq.gz --readFilesCommand zcat --outSAMtype BAM Unsorted --outFileNamePrefix ./aligned/ERR015618
+
+# Same command: different way of writing
+STAR \
+--runThreadN 8 \
+--genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments \
+--readFilesIn ERR015618_1.fastq.gz ERR015618_2.fastq.gz \
+--readFilesCommand zcat --outSAMtype BAM Unsorted \
+--outFileNamePrefix ./aligned/ERR015618
+
+# Alignment of 2nd Pair 
+STAR --runThreadN 8 --genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments --readFilesIn ERR015623_1.fastq.gz ERR015623_2.fastq.gz --readFilesCommand zcat --outSAMtype BAM Unsorted --outFileNamePrefix ./aligned/ERR015623
+
+# Other way to write the script 
+STAR \
+--runThreadN 8 \
+--genomeDir /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/alignments \
+--readFilesIn ERR015623_1.fastq.gz ERR015623_2.fastq.gz \
+--readFilesCommand zcat \
+--outSAMtype BAM Unsorted \
+--outFileNamePrefix ./aligned/ERR015623
+
+# aligned directory has the output 2 fastq files. 
+# It gives you output in bam format
+# pwd 
+/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned
+# output 
+-rw-rw-r-- 1 dg1145 dg1145 709869817 May 11 17:02 ERR015618Aligned.out.bam
+-rw-rw-r-- 1 dg1145 dg1145      2008 May 11 17:02 ERR015618Log.final.out
+-rw-rw-r-- 1 dg1145 dg1145      7720 May 11 17:02 ERR015618Log.out
+-rw-rw-r-- 1 dg1145 dg1145       364 May 11 17:02 ERR015618Log.progress.out
+-rw-rw-r-- 1 dg1145 dg1145    119530 May 11 17:02 ERR015618SJ.out.tab
+-rw-rw-r-- 1 dg1145 dg1145 646000808 May 11 17:09 ERR015623Aligned.out.bam
+-rw-rw-r-- 1 dg1145 dg1145      2008 May 11 17:09 ERR015623Log.final.out
+-rw-rw-r-- 1 dg1145 dg1145      7720 May 11 17:09 ERR015623Log.out
+-rw-rw-r-- 1 dg1145 dg1145       364 May 11 17:09 ERR015623Log.progress.out
+-rw-rw-r-- 1 dg1145 dg1145    117976 May 11 17:09 ERR015623SJ.out.tab
+
+# Checking the aligned files data 
+less ERR015618Log.final.out
+less ERR015623Log.final.out
+
+less ERR015618SJ.out.tab
+
+# logfile
+# gives information about the alignment run 
+# tells you the percentage of Uniquely mapped reads 
+
+# FeatureCounts run on bam files (Run together)
+featureCounts -T 8 -a /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/gencode.vM29.annotation.gtf -o NewFeatureCountsRNASeq ERR015618Aligned.out.bam ERR015623Aligned.out.bam
+
+# feature counts on ERR015618Aligned.out.bam individually run
+featureCounts -T 8 -a /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/gencode.vM29.annotation.gtf -o Output_FeatureCounts_ERR015618 ERR015618Aligned.out.bam 
+
+# feature counts on ERR015623Aligned.out.bam
+featureCounts -T 8 -a /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/gencode.vM29.annotation.gtf -o Output_FeatureCounts_ERR015623 ERR015623Aligned.out.bam
+
+# gene level count meta features
+featureCounts -T 9 -t 'exon' -g 'gene_id' -a /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/gencode.vM29.annotation.gtf -o rnaseq_fc_counts.txt ERR015618Aligned.out.bam ERR015623Aligned.out.bam
+
+# feature counts in csv file
+featureCounts -T 8 -a /home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/gencode.vM29.annotation.gtf -o Output_FeatureCounts_ERR015618.csv ERR015618Aligned.out.bam 
+
+
+# Generating .bam to .stats files using samtools
+samtools stats ERR015623Aligned.out.bam > ERR015623.bam.stats
+less ERR015623.bam.stats
+
+samtools stats ERR015618Aligned.out.bam > ERR015618.bam.stats
+less ERR015618.bam.stats
+
+# To see the plots of your stats files in plot_output_ERR015618 file
+mkdir plot_output_ERR015618
+plot-bamstats -p plot_output_ERR015618/bamplot_ERR015618 ERR015618.bam.stats
+
+# Output
+bamplot_ERR015618-acgt-cycles.gp   bamplot_ERR015618.html              bamplot_ERR015618-quals2.png
+bamplot_ERR015618-acgt-cycles.png  bamplot_ERR015618-indel-cycles.gp   bamplot_ERR015618-quals3.gp
+bamplot_ERR015618-coverage.gp      bamplot_ERR015618-indel-cycles.png  bamplot_ERR015618-quals3.png
+bamplot_ERR015618-coverage.png     bamplot_ERR015618-indel-dist.gp     bamplot_ERR015618-quals.gp
+bamplot_ERR015618-gc-content.gp    bamplot_ERR015618-indel-dist.png    bamplot_ERR015618-quals-hm.gp
+bamplot_ERR015618-gc-content.png   bamplot_ERR015618-insert-size.gp    bamplot_ERR015618-quals-hm.png
+bamplot_ERR015618-gc-depth.gp      bamplot_ERR015618-insert-size.png   bamplot_ERR015618-quals.png
+bamplot_ERR015618-gc-depth.png     bamplot_ERR015618-quals2.gp
+
+# making directory to store bam plots for ERR015623
+# this command generates graphs and images which can be viewed in Filezilla
+mkdir plot_output_ERR015623
+plot-bamstats -p plot_output_ERR015623/bamplot_ERR015623 ERR015623.bam.stats
+
+# Output 
+bamplot_ERR015623-acgt-cycles.gp   bamplot_ERR015623.html              bamplot_ERR015623-quals2.png
+bamplot_ERR015623-acgt-cycles.png  bamplot_ERR015623-indel-cycles.gp   bamplot_ERR015623-quals3.gp
+bamplot_ERR015623-coverage.gp      bamplot_ERR015623-indel-cycles.png  bamplot_ERR015623-quals3.png
+bamplot_ERR015623-coverage.png     bamplot_ERR015623-indel-dist.gp     bamplot_ERR015623-quals.gp
+bamplot_ERR015623-gc-content.gp    bamplot_ERR015623-indel-dist.png    bamplot_ERR015623-quals-hm.gp
+bamplot_ERR015623-gc-content.png   bamplot_ERR015623-insert-size.gp    bamplot_ERR015623-quals-hm.png
+bamplot_ERR015623-gc-depth.gp      bamplot_ERR015623-insert-size.png   bamplot_ERR015623-quals.png
+bamplot_ERR015623-gc-depth.png     bamplot_ERR015623-quals2.gp
+
+
+# Viewing bam files 
+samtools view ERR015623Aligned.out.bam | head
+samtools view ERR015618Aligned.out.bam | head
+
+# sorting bam files 
+samtools sort ERR015618Aligned.out.bam > ERR015618_sorted.bam
+samtools view ERR015618_sorted.bam | head
+ 
+samtools sort ERR015623Aligned.out.bam > ERR015623_sorted.bam
+samtools view ERR015623_sorted.bam | head
+
+# Creating index files from bam files: 1st sort your bam files before indexing to .bai
+
+samtools index ERR015618_sorted.bam ERR015618_sorted.bam.bai
+samtools index ERR015618_sorted.bam ERR015618_sorted.bai
+
+samtools index ERR015623_sorted.bam ERR015623_sorted.bam.bai 
+samtools index ERR015623_sorted.bam ERR015623_sorted.bai
+
+# To view bam files and format 
+samtools view ERR015623_sorted.bam | less -S 
+
+###
+Copying files from Remote to Local Computer
+# to secure copy files from Ron (Remote to Local computer)
+# stay in your local computer
+# secure copying bam files to visualize in IGV browser
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015623Aligned.out.bam /Users/devyagurung/Desktop/Gen_811_Lab
+
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015618Aligned.out.bam /Users/devyagurung/Desktop/Gen_811_Lab
+
+# Secure copying feature counts data to local desktop
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/Output_FeatureCounts_ERR015618 /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/Output_FeatureCounts_ERR015618.summary /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/Output_FeatureCounts_ERR015623 /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/Output_FeatureCounts_ERR015623.summary /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+# copying bam index files
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015618_sorted.bai /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015623_sorted.bam.bai /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015623_sorted.bai /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015618_sorted.bam.bai /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015623_sorted.bam /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/ERR015618_sorted.bam /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/GRCm39.genome.fa /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+# scp feature counts file in .txt 
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/rnaseq_fc_counts.txt /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+scp dg1145@ron.sr.unh.edu:/home/unhTW/users/dg1145/RNA_Project/Cancer_Mouse_Paired_end/trimmed-reads/trimmed_fastqc/aligned/rnaseq_fc_counts.txt.summary /Users/devyagurung/Desktop/Gen_811_Lab/Tutorial_RNA_Seq_R
+
+
+# Output files from scp of bam and .bai files
+-rw-r--r--  1 devyagurung  staff   2.5M May 12 15:58 ERR015618_sorted.bai
+-rw-r--r--  1 devyagurung  staff   2.8M May 12 15:59 ERR015623_sorted.bam.bai
+-rw-r--r--  1 devyagurung  staff   2.8M May 12 16:00 ERR015623_sorted.bai
+-rw-r--r--  1 devyagurung  staff   538M May 12 16:01 ERR015623_sorted.bam
+-rw-r--r--  1 devyagurung  staff   2.5M May 12 16:02 ERR015618_sorted.bam.bai
+-rw-r--r--  1 devyagurung  staff   586M May 12 16:03 ERR015618_sorted.bam
+
+
+# Looking at the top of GTF file
+
+head gencode.vM29.annotation.gtf
