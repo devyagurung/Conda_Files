@@ -30,6 +30,8 @@ II. Raw Sequencing Reads Analysis
      Website link of data collection: https://www.ebi.ac.uk/ena/browser/view/PRJEB2203?show=reads    
 2. Then run fastqc to check the quality of your reads. 
 3. Fastqc files were checked in Filezilla. Filezilla was installed in computer. 
+Links to filezilla: it offere free FTP solution
+https://filezilla-project.org/
 
 <img width="802" alt="image" src="https://user-images.githubusercontent.com/10855866/168224153-9b080209-e6e4-411e-bccb-337e7b8c9b29.png">
 
