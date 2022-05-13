@@ -5,7 +5,7 @@
  
  # Project: RNA seq analysis in Mouse Breast Cancer
 
- # Exploring various pipelines to analyze the RNA seq data 
+ # Exploring various pipelines to analyze RNA seq data 
  # Used Pair-wise raw fastq data. 
  
  Overview of the Workflow 
@@ -54,11 +54,25 @@ options to filter: Use GTF file of (regions: CHR) Comprehensive gene annotation 
 STAR manual: 
 https://physiology.med.cornell.edu/faculty/skrabanek/lab/angsd/lecture_notes/STARmanual.pdf
 
+Once the fasta files and gtf files were downloaded. 
+Star was performed for generating genome index. 
+Star: Generating genome index
+
+<img width="468" alt="image" src="https://user-images.githubusercontent.com/10855866/168225018-2c71ca05-0f3f-43f5-bf23-75570cc8d896.png">
+
 12. STAR was also used to do alignments of the sequence. Ran pair-end reads 
-13. After STAR, output files such as .bam were generated which was used in next step.
-14. FeatureCounts was performed on .bam files output 
-15. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
-16. The output from featureCounts were used in R to see files. 
+~ Alignment Output files: 1st Pair!
+
+<img width="360" alt="image" src="https://user-images.githubusercontent.com/10855866/168225131-77b30376-878c-4909-b4a3-37c627db14d7.png">
+
+Alignment Output files: 2nd Pair!
+<img width="361" alt="image" src="https://user-images.githubusercontent.com/10855866/168225201-2e4b08b3-cca4-49b6-9288-345ff42cf85d.png">
+
+14. After STAR, output files such as .bam were generated which was used in next step.
+
+15. FeatureCounts was performed on .bam files output 
+16. Samtools was used on bam files to generate bam stats files, to create bam plot files. 
+17. The output from featureCounts were used in R to see files. 
 
 
 
