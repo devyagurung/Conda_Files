@@ -33,13 +33,10 @@ II. Raw Sequencing Reads Analysis
 Links to filezilla: it offere free FTP solution
 https://filezilla-project.org/
 
-<img width="802" alt="image" src="https://user-images.githubusercontent.com/10855866/168224153-9b080209-e6e4-411e-bccb-337e7b8c9b29.png">
-
 
 4. Next, performed trimming. 
 5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
 6. Then, the Fastqc were performed in trimmed files. The trimmed fastqc files were also checked in Filezilla and compared. 
-
 
 <img width="745" alt="image" src="https://user-images.githubusercontent.com/10855866/168223789-67bb2527-7772-4d41-91c9-3f36e0fde43f.png">
 
