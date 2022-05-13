@@ -1,15 +1,17 @@
  # Gen 811 Project 
+ ## Devya Gurung 
  
  ## Project: RNA seq analysis in Mouse Breast Cancer
 
  ### Exploring various pipelines to analyze RNA seq data 
- ## Used Pair-wise raw fastq data. 
+ ### Used Pair-wise RNAseq saw fastq data. 
  
  ## Overview of the Workflow 
+ Figure 1 Description
  
  <img width="894" alt="image" src="https://user-images.githubusercontent.com/10855866/168222173-f7f996f6-1767-40b1-aa8c-34b7e72a2407.png">
 
-Table of Contents 
+## Table of Contents 
 ~ Getting Started 
 
 ## Background: 
@@ -20,10 +22,10 @@ This study was done in mice model to further understand the mechanism in human b
 
 ## Methods: 
 Steps in details 
-II. Raw Sequencing Reads Analysis
+Raw Sequencing Reads Analysis
    Fastq file data format 
 1. 1st get the fastq raw data (RNA seq) from public databases.
-   ~ The fastq raw data (RNA seq) from public databases
+   ~ The fastq raw data (RNA seq) downloaded from public databases
      Website link of data collection: https://www.ebi.ac.uk/ena/browser/view/PRJEB2203?show=reads    
 2. Then run fastqc to check the quality of your reads. 
 3. Fastqc files were checked in Filezilla. Filezilla was installed in computer. 
@@ -35,6 +37,9 @@ https://filezilla-project.org/
 5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
 6. Then, the Fastqc were performed in trimmed files. The trimmed fastqc files were also checked in Filezilla and compared. 
 
+ Figure 2 Description
+ ~ The trimmed fastqc files viewed from Filezilla.
+ 
 <img width="745" alt="image" src="https://user-images.githubusercontent.com/10855866/168223789-67bb2527-7772-4d41-91c9-3f36e0fde43f.png">
 
 7. Then, Genome Index were created using STAR. 
@@ -61,7 +66,8 @@ Star: Generating genome index
 
 Samtools output files from bam files such as png files were viewed in Filezilla. 
 
-Fig below: Indels: Insertion/deletions stats
+Figure 3 Description: 
+Indels: Insertion/deletions stats
 
 Insertions/deletions ratio in 2 samples look slightly different. 
 The insertion/deletions ratio in sample2 ERR015623 has higher ratio difference than sample1 ERR015618. 
@@ -69,7 +75,7 @@ The insertion/deletions ratio in sample2 ERR015623 has higher ratio difference t
 <img width="732" alt="image" src="https://user-images.githubusercontent.com/10855866/168329291-bf79eaac-962c-4e7f-871b-eddc6f36d194.png">
 
 
-Fig below: GC depth 
+Figure 4 Description: GC depth 
 The GC content in sample1 ERR015618 fell in-between 30-40th percentile. 
 But, in sample2 ERR015623, the GC content was below 10th percentile of mapped sequence. 
 
