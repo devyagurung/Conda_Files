@@ -66,7 +66,12 @@ Samtools output files from bam files such as png files were viewed in Filezilla.
 
 <img width="736" alt="image" src="https://user-images.githubusercontent.com/10855866/168225581-c3420d9f-5fec-4c08-8729-dd072797a47f.png">
 
-<img width="734" alt="image" src="https://user-images.githubusercontent.com/10855866/168225649-ccdfcef6-1681-47d1-a209-cb888628097e.png">
+Fig below: GC depth 
+The GC content in sample1 ERR015618 fell in-between 30-40th percentile. 
+But, in sample2 ERR015623, the GC content was below 10th percentile of mapped sequence. 
+
+<img width="764" alt="image" src="https://user-images.githubusercontent.com/10855866/168328399-c423e3e2-5007-4a57-937c-33f8f676975b.png">
+
 
 
 12. The output from featureCounts were used in R to view the files and summary. 
