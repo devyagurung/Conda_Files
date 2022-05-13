@@ -64,7 +64,13 @@ Star: Generating genome index
 
 Samtools output files from bam files such as png files were viewed in Filezilla. 
 
-<img width="736" alt="image" src="https://user-images.githubusercontent.com/10855866/168225581-c3420d9f-5fec-4c08-8729-dd072797a47f.png">
+Fig below: Indels: Insertion/deletions stats
+
+Insertions/deletions ratio in 2 samples look slightly different. 
+The insertion/deletions ratio in sample2 ERR015623 has higher ratio difference than sample1 ERR015618. 
+
+<img width="732" alt="image" src="https://user-images.githubusercontent.com/10855866/168329291-bf79eaac-962c-4e7f-871b-eddc6f36d194.png">
+
 
 Fig below: GC depth 
 The GC content in sample1 ERR015618 fell in-between 30-40th percentile. 
