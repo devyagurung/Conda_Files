@@ -30,9 +30,15 @@ II. Raw Sequencing Reads Analysis
      Website link of data collection: https://www.ebi.ac.uk/ena/browser/view/PRJEB2203?show=reads    
 2. Then run fastqc to check the quality of your reads. 
 3. Fastqc files were checked in Filezilla. Filezilla was installed in computer. 
-4. Next, perform trimming. 
-5. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
-6. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
+
+<img width="764" alt="image" src="https://user-images.githubusercontent.com/10855866/168224101-31e016ac-b237-4eee-a5a6-e3032add2d09.png">
+
+<img width="802" alt="image" src="https://user-images.githubusercontent.com/10855866/168224153-9b080209-e6e4-411e-bccb-337e7b8c9b29.png">
+
+
+5. Next, perform trimming. 
+6. Trimming was done via trim_scriptV2 which has trimming scripts and parameters inside
+7. Next, Fastqc were performed in trimming files. The trimmed fastqc files were checked in Filezilla
 
 <img width="766" alt="image" src="https://user-images.githubusercontent.com/10855866/168223667-e4559ce9-f889-4655-a825-2470c45c5243.png">
 
